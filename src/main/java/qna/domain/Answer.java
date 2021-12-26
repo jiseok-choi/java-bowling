@@ -45,20 +45,15 @@ public class Answer extends AbstractEntity {
         this.contents = contents;
     }
 
-    public Answer setDeleted(boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
     public boolean isDeleted() {
         return deleted;
     }
 
-    public boolean isOwner(User writer) {
+    private boolean isOwner(User writer) {
         return this.writer.equals(writer);
     }
 
-    public void canDelete(User loginUser) throws CannotDeleteException {
+    private void canDelete(User loginUser) throws CannotDeleteException {
         if (!isOwner(loginUser)) {
             throw new CannotDeleteException("다른 사람이 쓴 답변이 있어 삭제할 수 없습니다.");
         }
